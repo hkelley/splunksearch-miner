@@ -45,7 +45,7 @@ class SavedSearch(SimpleJSON):
             self.name,i,rkwargs[i])
 
         # Splunk payload
-        search_text=("savedsearch \"%s\"" % (self.search_name))
+        search_text= 'savedsearch \"%s\"' % (self.search_name)
         LOG.debug('%s - search_text  = %s', self.name, search_text)
         payload = {
           'search': search_text,
