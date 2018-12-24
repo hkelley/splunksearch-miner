@@ -21,6 +21,9 @@ class SavedSearch(SimpleJSON):
         self.earliest = self.config.get('earliest', "-2d")
         self.latest = self.config.get('latest', "now")
         self.search_name = self.config.get('search_name', None)
+        LOG.debug('%s - HACK self object: %s' ,        self.name,self.search_name)
+        LOG.debug('%s - HACK self.config: %s' ,        self.name,self.config.get('search_name', None))
+
         if self.search_name is None:
             raise ValueError('%s - search name is required' % self.name)
 
