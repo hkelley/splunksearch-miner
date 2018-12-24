@@ -32,6 +32,7 @@ class SavedSearch(SimpleJSON):
         
         url_base = self.url
         
+        # Request options
         rkwargs = dict(
             stream=True,
             verify=self.verify_cert,
@@ -42,11 +43,12 @@ class SavedSearch(SimpleJSON):
           LOG.debug('%s - request setting: %s = %s' ,
             self.name,i,rkwargs[i])
 
+        LOG.debug('%s - HACK: %s' ,        self.name,("savedsearch \"%s\"" % self.search_name))
         # Splunk payload
         payload = {
           'search': ("savedsearch \"%s\"" % self.search_name),
           'earliest': self.earliest,
-          'latest': self.earliest,
+          'latest': self.latest,
           'output_mode': "json"
         }
         for i in payload:
