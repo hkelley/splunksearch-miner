@@ -42,7 +42,7 @@ class SavedSearch(SimpleJSON):
         rkwargs = dict(
             stream=True,
             verify=self.verify_cert,
-            timeout=self.polling_timeout
+            timeout=self.polling_timeout,
             auth = (self.username , self.password)
         )
 
@@ -96,4 +96,5 @@ class SavedSearch(SimpleJSON):
         return result
 
     def _process_item(self, item):
-        return super(SavedSearch, self)._process_item(item):
+        item = super(SavedSearch, self)._process_item(item)
+        return item
