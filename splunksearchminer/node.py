@@ -58,8 +58,9 @@ class SavedSearch(SimpleJSON):
           data=payload,
           **rkwargs
         )
+        LOG.debug('Splunk sid received %s ' , r.text)
         sid = r.json()["sid"]
-
+        
         # check the status
         url = '%s/%s?output_mode=json' % (url_base,sid)
         job_data = {}
@@ -69,13 +70,13 @@ class SavedSearch(SimpleJSON):
             url,
             **rkwargs
           )
+          LOG.debug('Splunk sid %s status: %s' , sid,r.text)
           job_data = r.json()
-          time.sleep(1) # circuit breaker here
-          elapsed_secs += 1
+          time.sleep(1)
+          elapsed_secs += 1   # circuit breaker in while loop
           
         # fetch results
         url = '%s/%s/results?output_mode=json&count=0' % (url_base,sid)
-        # print url
         r = requests.get(
           url,
           **rkwargs
