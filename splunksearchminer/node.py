@@ -34,6 +34,8 @@ class SavedSearch(SimpleJSON):
         if self.compile_error is not None:
             raise RuntimeError(self.compile_error)
         
+        url_base = self.url
+        
         rkwargs = dict(
             stream=True,
             verify=self.verify_cert,
@@ -67,7 +69,7 @@ class SavedSearch(SimpleJSON):
             url,
             **rkwargs
           )
-          job_data = json.loads( r.text)
+          job_data = r.json()
           time.sleep(1) # circuit breaker here
           elapsed_secs += 1
           
