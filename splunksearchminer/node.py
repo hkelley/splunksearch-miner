@@ -21,8 +21,6 @@ class SavedSearch(SimpleJSON):
         self.earliest = self.config.get('earliest', "-2d")
         self.latest = self.config.get('latest', "now")
         self.search_name = self.config.get('search_name', None)
-        LOG.debug('%s - HACK self object: %s' ,        self.name,self.search_name)
-        LOG.debug('%s - HACK self.config: %s' ,        self.name,self.config.get('search_name', None))
 
         if self.search_name is None:
             raise ValueError('%s - search name is required' % self.name)
@@ -46,10 +44,10 @@ class SavedSearch(SimpleJSON):
           LOG.debug('%s - request setting: %s = %s' ,
             self.name,i,rkwargs[i])
 
-        LOG.debug('%s - HACK: %s' ,        self.name,("savedsearch \"%s\"" % self.search_name))
         # Splunk payload
+        search_text=("savedsearch \"%s\"" % self.search_name)
         payload = {
-          'search': ("savedsearch \"%s\"" % self.search_name),
+          'search': search_text,
           'earliest': self.earliest,
           'latest': self.latest,
           'output_mode': "json"

@@ -32,11 +32,12 @@ prototypes:
                 the JSON document. Default: results'
             indicator: the Splunk field name to use as indicator.
             fields: list of JSON attributes to include in the indicator value.
-            prefix: prefix to add to field names. Default is json
-            source_name: splunk.SEARCHNAME
+            prefix: None
             attributes:
-                confidence: 75
+                confidence: 60
                 share_level: red
+#                direction: inbound
+                type: IPv4                
             age_out:
                 default: 7d
                 sudden_death: true
