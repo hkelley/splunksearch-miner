@@ -8,10 +8,6 @@ from minemeld.ft.json import SimpleJSON
 
 LOG = logging.getLogger(__name__)
 
-
-
-LOG = logging.getLogger(__name__)
-
 class SavedSearch(SimpleJSON):
 
     def __init__(self, name, chassis, config):
@@ -42,6 +38,9 @@ class SavedSearch(SimpleJSON):
             timeout=self.polling_timeout,
             auth = (self.username , self.password)
         )
+        for i in rkwargs:
+          LOG.debug('%s - request setting: %s = %s' ,
+            self.name,i,rkwargs[i])
 
         # Splunk payload
         payload = {
@@ -50,6 +49,9 @@ class SavedSearch(SimpleJSON):
           'latest': self.earliest,
           'output_mode': "json"
         }
+        for i in payload:
+          LOG.debug('%s - POST payload value: %s = %s' ,
+            self.name,i,payload[i])
 
         # submit the search,  collect the sid
         url=url_base
@@ -58,7 +60,8 @@ class SavedSearch(SimpleJSON):
           data=payload,
           **rkwargs
         )
-        LOG.debug('Splunk sid received %s ' , r.text)
+        LOG.debug('%s - Splunk sid received: %s ' ,
+          self.name, r.text)
         sid = r.json()["sid"]
         
         # check the status
@@ -70,7 +73,8 @@ class SavedSearch(SimpleJSON):
             url,
             **rkwargs
           )
-          LOG.debug('Splunk sid %s status: %s' , sid,r.text)
+          LOG.debug('%s - Splunk sid %s status: %s' , 
+                    self.name, sid,r.text)
           job_data = r.json()
           time.sleep(1)
           elapsed_secs += 1   # circuit breaker in while loop
