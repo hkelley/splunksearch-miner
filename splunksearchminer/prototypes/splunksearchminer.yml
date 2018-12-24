@@ -21,6 +21,18 @@ prototypes:
         description: >
             Executed Splunk saved searches 
         config:
+            url: https://splunk.yourdomain.com:8089/services/search/jobs/
+            polling_timeout: timeout of the polling request in seconds.  Default: 20
+            verify_cert: boolean, if *true* feed HTTPS server certificate is verified. Default: *true*
+            username: string, for BasicAuth authentication (*username* required)
+            password: string, for BasicAuth authentication (*password* required)
+            earliest: Splunk time specifier.   Default: "-2d"
+            latest: Splunk time specifier;  Default: "now"
+            extractor: JMESPath expression for extracting the indicators from
+                the JSON document. Default: results
+            indicator: the Splunk field name to use as indicator.
+            fields: list of JSON attributes to include in the indicator value.
+            prefix: prefix to add to field names. Default: json
             source_name: splunk.SEARCHNAME
             attributes:
                 confidence: 75
