@@ -1,0 +1,17 @@
+{
+    "version": "0.1",
+    "name": "splunksearch-miner",
+    "author": "",
+    "author_email": "techbizdev@paloaltonetworks.com",
+    "description": "MineMeld node extension for retrieving indicators from Splunk searches",
+    "url": "https://github.com/hkelley/splunksearch-miner",
+    "entry_points": {
+        "minemeld_nodes": {
+            "splunksearchminer.SavedSearch": "splunksearchminer.node:SavedSearch",
+        },
+        "minemeld_prototypes": {
+            "splunksearchminer.prototypes": "splunksearchminer:prototypes"
+        }
+    },
+    "manifest_version": 0
+}

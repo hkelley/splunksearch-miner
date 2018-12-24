@@ -1,0 +1,31 @@
+url: https://github.com/hkelley/splunksearch-miner
+description: >
+    Import Splunk search results as indicators
+
+prototypes:
+    savedsearch:
+        author: Hugh Kelley
+        class: splunksearchminer.SavedSearch
+        development_status: EXPERIMENTAL
+        node_type: miner
+        indicator_types:
+          - URL
+          - IPv4
+          - IPv6
+          - domain
+        tags:
+            - ConfidenceHigh
+            - ConfidenceMedium
+            - ConfidenceLow
+            - ShareLevelRed
+        description: >
+            Executed Splunk saved searches 
+        config:
+            source_name: splunk.SEARCHNAME
+            attributes:
+                confidence: 75
+                share_level: red
+            age_out:
+                default: 7d
+                sudden_death: true
+                interval: 600
