@@ -30,11 +30,6 @@ class SavedSearch(SimpleJSON):
 
 
     def _build_iterator(self, now):
-        if self.search_name is None:
-            LOG.info('%s - search_name not set', self.name)
-            raise RuntimeError(
-                '%s - search_name not set' % self.name
-            )
 
         if self.compile_error is not None:
             raise RuntimeError(self.compile_error)
