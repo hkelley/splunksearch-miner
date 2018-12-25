@@ -13,12 +13,10 @@ class SavedSearch(SimpleJSON):
     def __init__(self, name, chassis, config):
         super(SavedSearch, self).__init__(name, chassis, config)
 
-        self.search_name = None
-
     def configure(self):
         super(SavedSearch, self).configure()
  
-        self.earliest = self.config.get('earliest', "-2d")
+        self.earliest = self.config.get('earliest', "-1h")
         self.latest = self.config.get('latest', "now")
         self.search_name = self.config.get('search_name', None)
 
@@ -45,11 +43,7 @@ class SavedSearch(SimpleJSON):
             self.name,i,rkwargs[i])
 
         # Splunk payload
-        LOG.debug('%s - self.search_name  = %s', self.name, self.search_name)
-        search_name = self.search_name
-        LOG.debug('%s - search_name  = %s', self.name, search_name)
-        search_text= 'savedsearch \"%s\"' % search_name
-        LOG.debug('%s - search_text  = %s', self.name, search_text)
+        search_text= 'savedsearch \"%s\"' % self.search_name
         payload = {
           'search': search_text,
           'earliest': self.earliest,
