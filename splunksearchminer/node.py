@@ -46,8 +46,8 @@ class SavedSearch(SimpleJSON):
         search_text= 'savedsearch \"%s\"' % self.search_name
         payload = {
           'search': search_text,
-          'earliest': self.earliest,
-          'latest': self.latest,
+          'earliest_time': self.earliest,
+          'latest_time': self.latest,
           'output_mode': "json"
         }
         for i in payload:
