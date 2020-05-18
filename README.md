@@ -6,4 +6,4 @@ This miner periodically executes a Splunk saved search via REST and returns a co
 
 ## Installation
 
-Install this extension directly from the git repo using the MineMeld System | Extensions menu.
+Install this extension directly from the git repo using your MineMeld server's System | Extensions menu.
